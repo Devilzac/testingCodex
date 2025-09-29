@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { expect, within } from '@storybook/test';
 
 import HelloWorld from './HelloWorld.vue';
 
@@ -15,10 +16,20 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+const verifyMessage: Story['play'] = async ({ canvasElement, args }) => {
+  const canvas = within(canvasElement);
+  const heading = await canvas.findByRole('heading', { level: 1 });
+
+  await expect(heading).toHaveTextContent(args.msg);
+};
+
+export const Default: Story = {
+  play: verifyMessage
+};
 
 export const CustomMessage: Story = {
   args: {
     msg: 'Testing Codex Rocks!'
-  }
+  },
+  play: verifyMessage
 };

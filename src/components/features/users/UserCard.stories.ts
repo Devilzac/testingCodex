@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { expect, within } from '@storybook/test';
 
 import type { User } from '@/types/user';
 
@@ -28,7 +29,27 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Active: Story = {};
+const verifyUserCard: Story['play'] = async ({ canvasElement, args }) => {
+  const canvas = within(canvasElement);
+  const { name, email, role, active } = args.user;
+
+  const heading = await canvas.findByRole('heading', { level: 3, name });
+  await expect(heading).toBeVisible();
+  await expect(canvas.getByText(email)).toBeVisible();
+  await expect(canvas.getByText(role)).toBeVisible();
+  await expect(canvas.getByText(active ? 'Active' : 'Inactive')).toBeVisible();
+
+  const initials = name
+    .split(' ')
+    .map((part) => part[0]?.toUpperCase())
+    .join('');
+
+  await expect(canvas.getByText(initials)).toBeInTheDocument();
+};
+
+export const Active: Story = {
+  play: verifyUserCard
+};
 
 export const Inactive: Story = {
   args: {
@@ -39,5 +60,6 @@ export const Inactive: Story = {
       email: 'grace@example.com',
       active: false
     }
-  }
+  },
+  play: verifyUserCard
 };

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { within, userEvent } from 'storybook/test';
+import { expect, fn, userEvent, within } from '@storybook/test';
 
-import { __mockAuthHandlers } from '@/stories/mocks/useAuth';
+import { __mockAuthHandlers, __resetAuthMocks } from '@/stories/mocks/useAuth';
 
 import LoginForm from './LoginForm.vue';
 
@@ -22,7 +22,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const loginSpy = fn();
+    __mockAuthHandlers({ login: loginSpy });
+
+    try {
+      const canvas = within(canvasElement);
+      const emailInput = await canvas.findByLabelText('Email');
+      const passwordInput = await canvas.findByLabelText('Password');
+
+      await userEvent.clear(emailInput);
+      await userEvent.type(emailInput, 'user@example.com');
+      await userEvent.clear(passwordInput);
+      await userEvent.type(passwordInput, 'password123');
+      await userEvent.click(canvas.getByRole('button', { name: 'Sign in' }));
+
+      await expect(loginSpy).toHaveBeenCalledWith('user@example.com', 'password123');
+    } finally {
+      __resetAuthMocks();
+    }
+  }
+};
 
 export const Submitting: Story = {
   loaders: [async () => {

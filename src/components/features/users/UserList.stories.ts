@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { expect, within } from '@storybook/test';
 
 import type { User } from '@/types/user';
 
@@ -45,18 +46,41 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Populated: Story = {};
+const exerciseList: Story['play'] = async ({ canvasElement, args }) => {
+  const canvas = within(canvasElement);
+
+  if (args.loading) {
+    await expect(canvas.getByText('Loading users…')).toBeVisible();
+    return;
+  }
+
+  if (!args.users.length) {
+    await expect(canvas.getByText('No users found.')).toBeVisible();
+    return;
+  }
+
+  for (const user of args.users) {
+    await expect(canvas.getByText(user.name)).toBeVisible();
+    await expect(canvas.getByText(user.email)).toBeVisible();
+  }
+};
+
+export const Populated: Story = {
+  play: exerciseList
+};
 
 export const Loading: Story = {
   args: {
     loading: true,
     users: []
-  }
+  },
+  play: exerciseList
 };
 
 export const Empty: Story = {
   args: {
     loading: false,
     users: []
-  }
+  },
+  play: exerciseList
 };

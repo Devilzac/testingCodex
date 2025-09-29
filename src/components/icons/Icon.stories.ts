@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
+import { expect, within } from '@storybook/test';
 
 import IconCommunity from './IconCommunity.vue';
 import IconDocumentation from './IconDocumentation.vue';
@@ -16,39 +17,51 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const expectIconCount = async ({ canvasElement }: Parameters<NonNullable<Story['play']>>[0], count: number) => {
+  const canvas = within(canvasElement);
+  const icons = canvas.container.querySelectorAll('svg');
+
+  await expect(icons).toHaveLength(count);
+};
+
 export const Documentation: Story = {
   render: () => ({
     components: { IconDocumentation },
     template: '<IconDocumentation />'
-  })
+  }),
+  play: (context) => expectIconCount(context, 1)
 };
 
 export const Tooling: Story = {
   render: () => ({
     components: { IconTooling },
     template: '<IconTooling />'
-  })
+  }),
+  play: (context) => expectIconCount(context, 1)
 };
 
 export const Ecosystem: Story = {
   render: () => ({
     components: { IconEcosystem },
     template: '<IconEcosystem />'
-  })
+  }),
+  play: (context) => expectIconCount(context, 1)
 };
 
 export const Community: Story = {
   render: () => ({
     components: { IconCommunity },
     template: '<IconCommunity />'
-  })
+  }),
+  play: (context) => expectIconCount(context, 1)
 };
 
 export const Support: Story = {
   render: () => ({
     components: { IconSupport },
     template: '<IconSupport />'
-  })
+  }),
+  play: (context) => expectIconCount(context, 1)
 };
 
 export const Gallery: Story = {
@@ -69,5 +82,6 @@ export const Gallery: Story = {
         <IconSupport />
       </div>
     `
-  })
+  }),
+  play: (context) => expectIconCount(context, 5)
 };
