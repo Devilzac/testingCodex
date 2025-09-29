@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "extends": "@tsconfig/node22/tsconfig.json",
   "include": [
     "vite.config.*",
@@ -16,4 +17,16 @@
     "moduleResolution": "Bundler",
     "types": ["node"]
   }
+=======
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "types": ["node"]
+  },
+  "include": ["vite.config.ts", "vitest.config.ts"]
+>>>>>>> 800bf29e063ee72cf4842e0d8e7a7c72bbdba1e2
 }
