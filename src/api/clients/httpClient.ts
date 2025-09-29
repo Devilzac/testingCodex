@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+/**
+ * Axios instance configured to communicate with the application's backend API.
+ * @see https://axios-http.com/docs/instance
+ */
 const httpClient = axios.create({
   baseURL: '/api',
   timeout: 10_000
