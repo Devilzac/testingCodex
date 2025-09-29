@@ -1,3 +1,6 @@
+/**
+ * Representation of a user record within the application.
+ */
 export interface User {
   id: string;
   name: string;

@@ -1,5 +1,8 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+/**
+ * Routes that are accessible without authentication.
+ */
 const publicRoutes: RouteRecordRaw[] = [
   {
     path: '/login',

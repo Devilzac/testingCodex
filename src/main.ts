@@ -6,6 +6,9 @@ import router from './router';
 
 import './assets/main.css';
 
+/**
+ * Root Vue application instance.
+ */
 const app = createApp(App);
 
 app.use(createPinia());

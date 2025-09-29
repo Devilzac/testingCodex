@@ -1,3 +1,6 @@
+/**
+ * Central export hub for commonly used UI components.
+ */
 export { default as BaseButton } from './base/BaseButton.vue';
 export { default as BaseInput } from './base/BaseInput.vue';
 export { default as AppHeader } from './layout/AppHeader.vue';

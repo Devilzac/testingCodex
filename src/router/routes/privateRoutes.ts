@@ -1,5 +1,8 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+/**
+ * Routes that require the user to be authenticated before access.
+ */
 const privateRoutes: RouteRecordRaw[] = [
   {
     path: '/',
