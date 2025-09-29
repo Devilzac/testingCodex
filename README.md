@@ -1,74 +1,68 @@
 # testingCodex
 
-This template should help get you started developing with Vue 3 in Vite.
+`testingCodex` is a Vue 3 + TypeScript playground focused on demonstrating a pragmatic frontend testing workflow. The project is scaffolded with Vite and showcases how to combine unit, component, and end-to-end tests when building modern Vue applications.
 
-## Recommended IDE Setup
+## 🚀 Features
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Vue 3 + Vite** for a fast and standards-based development experience.
+- **TypeScript-first** setup with `vue-tsc` for reliable type checking across `.vue` files.
+- **Vitest** unit testing pre-configured with component testing utilities.
+- **Playwright** end-to-end tests for browser automation.
+- **ESLint + Prettier** integration to keep the codebase consistent.
 
-## Recommended Browser Setup
+## 🧰 Tooling Recommendations
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- [VS Code](https://code.visualstudio.com/) with the [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) extension (remember to disable Vetur).
+- Install the Vue Devtools extension for your browser:
+  - [Chrome / Edge / Brave](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+  - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
-## Type Support for `.vue` Imports in TS
+## 📦 Getting Started
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+Clone the repository and install dependencies:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+Start the development server with hot module replacement:
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+Build the production bundle:
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## ✅ Testing
+
+Run the unit test suite:
 
 ```sh
 npm run test:unit
 ```
 
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
+Run the Playwright end-to-end tests (install browsers first with `npx playwright install`):
 
 ```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
 npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## 🧹 Linting
+
+Lint and fix files with ESLint:
 
 ```sh
 npm run lint
 ```
-"# testingCodex" 
+
+## 🔧 Configuration
+
+Most configuration lives in the root configuration files (`vite.config.ts`, `vitest.config.ts`, `playwright.config.ts`, etc.). See the [Vite configuration reference](https://vite.dev/config/) for additional customization ideas.
+
+## 📄 License
+
+This project is available under the MIT License. See the [LICENSE](LICENSE) file for details.
