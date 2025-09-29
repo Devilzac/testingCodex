@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite';
-import { within, userEvent } from '@storybook/test';
+import { within, userEvent } from 'storybook/test';
 
 import { __mockAuthHandlers } from '@/stories/mocks/useAuth';
 
