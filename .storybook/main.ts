@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 
-import { mergeConfig } from 'vite';
+import { mergeConfig, type PluginOption } from 'vite';
 import type { StorybookConfig } from '@storybook/vue3-vite';
 
 const config: StorybookConfig = {
@@ -11,6 +11,22 @@ const config: StorybookConfig = {
     options: {}
   },
   viteFinal: async (config) => {
+    const disabledPlugins = new Set(['vite-plugin-vue-devtools', 'vite-plugin-inspect']);
+    const isNamedPlugin = (plugin: PluginOption): plugin is { name: string } =>
+      typeof plugin === 'object' &&
+      plugin !== null &&
+      !Array.isArray(plugin) &&
+      'name' in plugin &&
+      typeof (plugin as { name?: unknown }).name === 'string';
+
+    config.plugins = (config.plugins ?? []).filter((plugin) => {
+      if (!isNamedPlugin(plugin)) {
+        return true;
+      }
+
+      return !disabledPlugins.has(plugin.name);
+    });
+
     return mergeConfig(config, {
       resolve: {
         alias: {
